@@ -372,6 +372,7 @@ class Planner(Object):
         else:
             print( "Looks like you dont have time to grant this request. The following hours were unavailable within your request: [%s]" %(", ".join(sorted([str(i) for i in unavailable_time]))) )
 
+
     def reservations(self):
         for k,v in self._periods.iteritems():
             for i in v:
