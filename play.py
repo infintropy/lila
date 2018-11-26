@@ -32,11 +32,17 @@ class UniqueObjectException(Exception):
 
 class IOUtil(object):
     def __init__(self):
-        self.record_base = "/Users/donaldstrubler/PycharmProjects/lila/source/%s.lla"
+        self.record_base = "/Users/donaldstrubler/PycharmProjects/lila/source/%s_%s.lla"
+        self.day = datetime.datetime.now().strftime( "%Y%m%d" )
+
 
     def write(self, filename, data):
-        with open(self.record_base %filename, 'w') as outfile:
+        with open(self.record_base %(self.day, filename), 'w') as outfile:
             yaml.dump(data, outfile, default_flow_style=False)
+
+    def logs(self):
+        pass
+
 
 
 
@@ -150,7 +156,11 @@ class Object(object):
         s_obj = {}
         for i in self.save_info:
             if hasattr(self, i):
-                s_obj[i] = str(getattr(self, i))
+                a2d = getattr(self, i)
+                if hasattr(a2d, "id"):
+                    s_obj[i] = a2d.id
+                else:
+                    s_obj[i] = a2d
         s_obj['name'] = self.name
         s_obj['class'] = self.__class__.__name__
         return s_obj
@@ -345,6 +355,9 @@ class Planner(Object):
     def increment(self, value):
         self._minute_increments = value
         self._multiplier = 60/self._minute_increments
+
+    def reset_day_expectations(self):
+        self._day_range = set(xrange(0, 24 * (60 / self._minute_increments)))
 
     def request(self, start, end):
         request = set(xrange(int(start*self._multiplier), int(end*self._multiplier) ) )
