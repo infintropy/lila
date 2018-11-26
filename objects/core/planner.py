@@ -3,6 +3,9 @@ from __future__ import print_function
 from operator import itemgetter
 from itertools import groupby
 
+#main boilerplate for making an object
+from objects.base.object import Object
+from objects.utils.ghosts import nog
 
 class Planner(Object):
     def __init__(self, **kwargs):
