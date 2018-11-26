@@ -5,6 +5,7 @@ from itertools import groupby
 
 #main boilerplate for making an object
 from objects.base.object import Object
+from objects.core.event import Event
 from objects.utils.ghosts import nog
 
 class Planner(Object):
