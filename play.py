@@ -32,7 +32,8 @@ class UniqueObjectException(Exception):
 
 class IOUtil(object):
     def __init__(self):
-        self.record_base = "/Users/donaldstrubler/PycharmProjects/lila/source/%s_%s.lla"
+        self.record_base = "C:/Users/dstrubler/Desktop/openlife/store/%s_%s.lla"
+        self.record_base = "C:/Users/dstrubler/Desktop/openlife/store/%s_%s.lla"
         self.day = datetime.datetime.now().strftime( "%Y%m%d" )
 
 
@@ -301,7 +302,7 @@ class Planner(Object):
         self._day_range = set(xrange(0, 24*(60/self._minute_increments)))
         self._responsibility_minimum = 2 #hours
 
-
+        self._day_attributions = {}
 
 
 
@@ -327,7 +328,7 @@ class Planner(Object):
                          }
 
 
-        self.save_info.extend( [ "_periods", "_minute_increments" ] )
+        self.save_info.extend( ["_periods", "_minute_increments" ] )
 
     @property
     def events(self):
@@ -359,7 +360,7 @@ class Planner(Object):
     def reset_day_expectations(self):
         self._day_range = set(xrange(0, 24 * (60 / self._minute_increments)))
 
-    def request(self, start, end):
+    def request(self, start, end, event=None):
         request = set(xrange(int(start*self._multiplier), int(end*self._multiplier) ) )
         req_bool = True
         unavailable_time = []
@@ -369,9 +370,24 @@ class Planner(Object):
                 unavailable_time.append( i )
         if req_bool == True:
             self._day_range -= set(xrange(int(start*self._multiplier), int(end*self._multiplier) ) )
+            if not event:
+                event = Event(name="Event")
+            for i in request:
+                self._day_attributions[i] = event.id
         else:
             print( "Looks like you dont have time to grant this request. The following hours were unavailable within your request: [%s]" %(", ".join(sorted([str(i) for i in unavailable_time]))) )
 
+
+    def map_reservations(self):
+        unique_events = sorted(list(set([v for i,v in self._day_attributions.iteritems()])))
+        return dict((e, self.group_time([k for k,v in self._day_attributions.iteritems() if v == e])) for e in unique_events)
+
+    def group_time(self, list):
+        periods = []
+        for k, g in groupby(enumerate(sorted(list)), lambda (i, x): i - x):
+            e = map(itemgetter(1), g)
+            periods.append(e)
+        return periods
 
     def reservations(self):
         for k,v in self._periods.iteritems():
