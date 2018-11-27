@@ -6,11 +6,11 @@ from itertools import groupby
 #main boilerplate for making an object
 from objects.base.object import Object
 from objects.core.event import Event
-from objects.utils.ghosts import nog
+
 
 class Planner(Object):
     def __init__(self, **kwargs):
-        super(Planner, self).__init__(realm=nog, **kwargs)
+        super(Planner, self).__init__(**kwargs)
 
         self._minute_increments = 15 #minutes
         self._multiplier = 60 / self._minute_increments

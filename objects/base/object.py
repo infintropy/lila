@@ -3,12 +3,13 @@ from __future__ import print_function
 import uuid
 import datetime
 import pprint
-
-
+from objects.base.realm import Realm
+global nog
+nog = Realm()
 
 
 class Object(object):
-    def __init__(self, realm=None, name=None):
+    def __init__(self, name=None):
         self._parent = None
         self._realm = None
         self._name = None
@@ -21,29 +22,27 @@ class Object(object):
 
         self.save_info = ["_x", "_y", "_z", "_created", "_name", "id", "_category", "_relation", "_realm", "_location"]
 
-
         self._x = 0
         self._y = 0
         self._z = 0
 
         self._created = datetime.datetime.now()
 
-
         if name:
             self._name = name
 
-        if realm:
-            self._realm = realm
-            self.__repr__()
-            methere = self._realm.reify(self)
-            return methere
+
+        self._realm = nog
+
+        methere = self._realm.reify(self)
+        return methere
 
 
     def __repr__(self):
         ext = ""
         if self._name:
             ext = " NAME:: %s" %self._name
-        return "%s:: ID: %s. Living inside %s%s" %(self.__class__.__name__, self.id, self._realm.__class__.__name__, ext)
+        return "%s:: ID: %s. %s" %(self.__class__.__name__, self.id, ext)
 
     def __str__(self):
         return self.__repr__()

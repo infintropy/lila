@@ -4,7 +4,7 @@ from objects.utils.ghosts import nog
 
 class Event(Object):
     def __init__(self, start=None, **kwargs):
-        super(Event, self).__init__(realm=nog, **kwargs)
+        super(Event, self).__init__(**kwargs)
 
         self._description = ""
         self._length = 60 #minutes

@@ -3,7 +3,7 @@ from __future__ import print_function
 
 import uuid
 from objects.utils.ioutil import IOUtil
-
+from objects.exceptions.exceptions import *
 
 
 class Realm(object):
