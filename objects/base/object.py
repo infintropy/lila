@@ -95,11 +95,11 @@ class Object(object):
 
     @property
     def links(self):
-        pass
+        return self._links
 
-    @links.setter
-    def links(self, link):
-        pass
+    def add_link(self, object):
+        self._links.append(object)
+
 
     def autoname(self):
         ind = 1

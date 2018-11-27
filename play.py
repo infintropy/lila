@@ -11,6 +11,9 @@ from objects.core.task import *
 from objects.core.intake import *
 from objects.core.journal import *
 
+#digital bits
+from objects.digital.file import *
+
 #let there be mind
 from objects.base.object import nog
 

@@ -11,3 +11,5 @@ class Journal(Object):
     def write(self, msg):
         r = JournalEntry()
         r.category = msg
+
+        self.add_link( r )
