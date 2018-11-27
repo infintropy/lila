@@ -9,6 +9,7 @@ from objects.core.event import *
 from objects.core.task import *
 
 from objects.core.intake import *
+from objects.core.journal import *
 
 #let there be mind
 from objects.base.object import nog

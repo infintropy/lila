@@ -1,2 +1,0 @@
-nog = None
-uni = None

@@ -4,6 +4,7 @@ import uuid
 import datetime
 import pprint
 from objects.base.realm import Realm
+
 global nog
 nog = Realm()
 
@@ -28,11 +29,16 @@ class Object(object):
 
         self._created = datetime.datetime.now()
 
-        if name:
-            self._name = name
+
 
 
         self._realm = nog
+
+        if name:
+            self._name = name
+        else:
+            self._name = self.autoname()
+
 
         methere = self._realm.reify(self)
         return methere
@@ -94,6 +100,12 @@ class Object(object):
     @links.setter
     def links(self, link):
         pass
+
+    def autoname(self):
+        ind = 1
+        if self.realm._class.get( self.__class__.__name__ ):
+            ind = len(self.realm._class[self.__class__.__name__])+1
+        return self.__class__.__name__ + "%d" %ind
 
 
     @category.setter

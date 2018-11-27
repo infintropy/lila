@@ -1,7 +1,6 @@
 
 from objects.core.event import Event
 
-
 class Task(Event):
     def __init__(self, **kwargs):
         super(Task, self).__init__(**kwargs)

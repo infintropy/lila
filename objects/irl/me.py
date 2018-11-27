@@ -10,4 +10,5 @@ class Me(Human):
         self.height = 71
 
         self.planner = Planner()
-        self.planner.category = "My Planner"
+        self.planner.category = "Personal"
+        self.planner.name = "My Planner!"

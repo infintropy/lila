@@ -1,5 +1,4 @@
 from objects.base.object import Object
-from objects.utils.ghosts import nog
 
 
 class Event(Object):

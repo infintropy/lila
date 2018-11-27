@@ -6,7 +6,7 @@ from itertools import groupby
 #main boilerplate for making an object
 from objects.base.object import Object
 from objects.core.event import Event
-
+from objects.core.task import Task
 
 class Planner(Object):
     def __init__(self, **kwargs):
