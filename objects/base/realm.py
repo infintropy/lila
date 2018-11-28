@@ -47,7 +47,7 @@ class Realm(object):
         if make is True:
             self.inf[object.id] = object
             self._class[object.__class__.__name__].append( object.id )
-            print(self.inf[object.id])
+            #print(self.inf[object.id])
             self.serialize()
 
             return self.inf[object.id]

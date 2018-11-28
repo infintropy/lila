@@ -1,5 +1,6 @@
 
 from __future__ import print_function
+
 import uuid
 import datetime
 import pprint
@@ -10,7 +11,7 @@ nog = Realm()
 
 
 class Object(object):
-    def __init__(self, name=None):
+    def __init__(self, name=None, description=None):
         self._parent = None
         self._realm = None
         self._name = None
@@ -19,6 +20,7 @@ class Object(object):
         self._unique_class = None
         self._val = 0
         self._category = "Unknown"
+        self._description = ""
         self._links = []
 
         self.save_info = ["_x", "_y", "_z", "_created", "_name", "id", "_category", "_relation", "_realm", "_location"]
@@ -38,6 +40,9 @@ class Object(object):
             self._name = name
         else:
             self._name = self.autoname()
+
+        if description:
+            self._description = description
 
 
         methere = self._realm.reify(self)
@@ -71,6 +76,14 @@ class Object(object):
     def relation(self, val):
         if type(val) == str:
             self._relation = val
+
+    @property
+    def description(self):
+        return self._description
+
+    @description.setter
+    def description(self, val):
+        self._description = str(val)
 
     @property
     def realm(self):
@@ -112,7 +125,7 @@ class Object(object):
     def category(self, category):
         self._category = category
         if self._category in self.realm.class_categories( self.__class__.__name__ ):
-            print("There are others with this category!")
+            pass
 
     @location.setter
     def location(self, location):
