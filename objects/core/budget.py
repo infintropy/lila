@@ -16,6 +16,8 @@ class Account(Object):
 
 
 class Budget(Object):
+
+
     def __init__(self, **kwargs):
         super(Budget, self).__init__(**kwargs)
 
@@ -24,7 +26,9 @@ class Budget(Object):
         self._transactions = []
         self._salary = 40.74*108*2 #encoded lol
         self._monthly = {}
+        self.test_dog = "Derp"
 
+        self.save_info.extend(["_monthly", "test_dog"])
         self._perc_savings = 25
         self._perc_giving  = 10
 
@@ -33,6 +37,8 @@ class Budget(Object):
         self._monthly["spotify"]  = BudgetItem( 15, "spotify", 21)
         self._monthly["hbo"]      = BudgetItem( 15, "hbo", 21)
         self._monthly["internet"] = BudgetItem( 65, "internet", 21)
+
+        self._realm.io.update_table( self )
 
     def add(self, amount, description):
         transaction = Transaction(amount=amount, description=description)
@@ -61,6 +67,7 @@ class BudgetItem(Object):
     @property
     def date(self):
         return self._draft_date
+
 
     @date.setter
     def date(self, day):

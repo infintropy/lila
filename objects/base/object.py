@@ -23,7 +23,8 @@ class Object(object):
         self._description = ""
         self._links = []
 
-        self.save_info = ["_x", "_y", "_z", "_created", "_name", "id", "_category", "_relation", "_realm", "_location"]
+        #properties that are vital for rebuilding
+        self.save_info = ["_x", "_y", "_z", "_created", "_name", "id", "_category", "_relation"]
 
         self._x = 0
         self._y = 0
@@ -31,22 +32,20 @@ class Object(object):
 
         self._created = datetime.datetime.now()
 
-
-
-
         self._realm = nog
-
         if name:
             self._name = name
         else:
             self._name = self.autoname()
-
         if description:
             self._description = description
 
 
-        methere = self._realm.reify(self)
-        return methere
+        self._realm.reify(self)
+
+
+
+        #return methere
 
 
     def __repr__(self):
@@ -124,8 +123,6 @@ class Object(object):
     @category.setter
     def category(self, category):
         self._category = category
-        if self._category in self.realm.class_categories( self.__class__.__name__ ):
-            pass
 
     @location.setter
     def location(self, location):

@@ -32,10 +32,8 @@ class Realm(object):
         if object.__class__.__name__ not in self._class.keys():
             self._class[ object.__class__.__name__ ] = []
             first = True
-            print('this is the first one of these made:: %s' %object.__class__.__name__)
 
         if object.__class__.__name__ in self._unique_classes:
-            print("This is being called out as a unique class")
             if first:
                 make = True
             else:
@@ -47,18 +45,17 @@ class Realm(object):
         if make is True:
             self.inf[object.id] = object
             self._class[object.__class__.__name__].append( object.id )
-            #print(self.inf[object.id])
-            self.serialize()
-
+            self.io.update_table( object )
             return self.inf[object.id]
 
 
-
+    """
     def class_categories(self, classname=None):
         if classname:
             return sorted(list(set([self.inf[f].category for f in self._class[classname]])))
         else:
             return sorted(list(set([v.category for i,v in self.inf.iteritems()])))
+    """
 
     def get_objects_from_category(self, category):
         return [v for i,v in self.inf.iteritems() if v.category == category]
@@ -67,6 +64,6 @@ class Realm(object):
         sout = []
         for i, o in self.inf.iteritems():
             sout.append( o.serialize() )
-        self.io.write( self.__class__.__name__.lower(), sout )
+        #self.io.write( self.__class__.__name__.lower(), sout )
         return sout
 

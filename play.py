@@ -21,3 +21,7 @@ from objects.core.budget import *
 
 #digital bits
 from objects.digital.file import *
+
+global o
+
+o = nog
