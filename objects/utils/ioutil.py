@@ -24,12 +24,14 @@ class IOUtil(object):
             table = self._db[object.type]
         table.upsert(object.serialize(), rec.id == object.id)
 
-    def get_table(self, type):
-        path = os.path.join( self.record_base, "_lila_rec_%s.lla" %type )
+    def get_table(self, object):
+        path = os.path.join( self.record_base, "_lila_rec_%s.lla" %object.type )
         if os.path.isfile( path ):
-            return self._db[type]
+            if not self._db.get( object.type ):
+                self._db[object.type] = TinyDB(os.path.join( self.record_base, "_lila_rec_%s.lla" %object.type ))
+            return self._db[object.type]
         else:
-            print("no table for %s found" %type)
+            print("no table for %s found" %object.type)
 
     def logs(self):
         pass

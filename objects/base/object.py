@@ -24,13 +24,13 @@ class Object(object):
         self._links = []
 
         #properties that are vital for rebuilding
-        self.save_info = ["_x", "_y", "_z", "_created", "_name", "id", "_category", "_relation"]
+        self.save_info = [ "_created", "_name", "id", "_category", "_relation"]
 
         self._x = 0
         self._y = 0
         self._z = 0
 
-        self._created = datetime.datetime.now()
+        self._created = datetime.datetime.now().strftime( "%Y%m%d_%H%M%S" )
 
         self._realm = nog
         if name:

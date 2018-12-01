@@ -28,7 +28,7 @@ class Budget(Object):
         self._monthly = {}
         self.test_dog = "Derp"
 
-        self.save_info.extend(["_monthly", "test_dog"])
+        #self.save_info.extend(["_monthly", "test_dog"])
         self._perc_savings = 25
         self._perc_giving  = 10
 

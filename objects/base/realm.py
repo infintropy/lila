@@ -11,6 +11,7 @@ class Realm(object):
     This is where an object can be exhibited
     """
 
+
     def __init__(self):
         self._description = None
         self.inf = {} #collects it all
@@ -19,6 +20,9 @@ class Realm(object):
 
         self._unique_classes = ["Me"]
         self._class = {}
+
+    def __getitem__(self, item):
+        return self._class[item]
 
     def __repr__(self):
         return "Realm: %s, containing %d objects.\n" %(self.__class__, len(self.inf.keys())) + "\n".join([str(v) for k,v in self.inf.iteritems()])
