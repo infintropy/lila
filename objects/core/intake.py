@@ -1,5 +1,5 @@
 from objects.base.group import Group
-
+from objects.irl.food import *
 
 class Recipe(Group):
     def __init__(self, **kwargs):
