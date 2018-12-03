@@ -19,7 +19,6 @@ class IOUtil(object):
     def update_table(self, object):
         table = self.get_table(object)
         if not table:
-            #make a new db
             self._db[object.type] = TinyDB(os.path.join( self.record_base, "_lila_rec_%s.lla" %object.type ))
             table = self._db[object.type]
         table.upsert(object.serialize(), rec.id == object.id)
@@ -32,6 +31,15 @@ class IOUtil(object):
             return self._db[object.type]
         else:
             print("no table for %s found" %object.type)
+
+    @property
+    def dbs(self):
+        return sorted([i for i in os.listdir( self.record_base ) if i.startswith("_lila_rec_")])
+
+    def map_tables(self):
+        for table in self.dbs:
+            dbname = table.split("_rec_")[-1].split('.')[0]
+            self._db[dbname] = TinyDB(os.path.join(self.record_base, table))
 
     def logs(self):
         pass
