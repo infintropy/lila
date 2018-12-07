@@ -148,4 +148,3 @@ class Object(object):
     def describe(self):
         pprint.pprint( self.serialize() )
 
-

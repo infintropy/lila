@@ -19,6 +19,7 @@ class Planner(Object):
 
         self._day_attributions = {}
 
+        #delete when db are completely set up.
         self._sleep_event = Event(name="SleepyTime")
         self._hygiene_event = Event(name="Bathroom")
         self._exercise_event = Event(name="Exercise")
