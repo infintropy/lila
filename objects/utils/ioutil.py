@@ -16,6 +16,9 @@ class IOUtil(object):
         self._record_base = tempfile.gettempdir()
         self.day = datetime.datetime.now().strftime( "%Y%m%d" )
 
+
+        self.map_tables()
+
     def update_table(self, object):
         table = self.get_table(object)
         if not table:
@@ -33,6 +36,7 @@ class IOUtil(object):
             print("no table for %s found" %object.type)
 
     @property
+    #returns all lila dbs kept in temp.
     def dbs(self):
         return sorted([i for i in os.listdir( self.record_base ) if i.startswith("_lila_rec_")])
 
@@ -44,9 +48,16 @@ class IOUtil(object):
     def logs(self):
         pass
 
+    def entity_from_record(self, id, cls):
+        pass
 
 
     @property
     def record_base(self):
         return self._record_base
+
+
+
+
+
 
